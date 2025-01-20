@@ -1,20 +1,26 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+
+import { SafeAreaView, View } from 'react-native';
+import ShoppingListHeader from './src/components/ShoppingListHeader';
+import ShoppingList from './src/components/ShoppingList';
+import { store } from './src/redux/store';  // Import the store
+import { Provider } from 'react-redux'; // Import the provider
+
 
 export default function App() {
+
+  const RouteApp = () => {
+    return (
+      <SafeAreaView>
+        <ShoppingListHeader />
+        <ShoppingList />
+      </SafeAreaView>
+    )
+  }
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Provider store={store}>
+      <RouteApp />  
+    </Provider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
