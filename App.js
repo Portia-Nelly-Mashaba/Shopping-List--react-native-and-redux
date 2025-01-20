@@ -1,10 +1,8 @@
-
-import { SafeAreaView, View } from 'react-native';
+import { SafeAreaView } from 'react-native';
 import ShoppingListHeader from './src/components/ShoppingListHeader';
 import ShoppingList from './src/components/ShoppingList';
-import { store } from './src/redux/store';  // Import the store
-import { Provider } from 'react-redux'; // Import the provider
-
+import { store } from './src/redux/store';
+import { Provider } from 'react-redux';
 
 export default function App() {
 
@@ -22,5 +20,3 @@ export default function App() {
     </Provider>
   );
 }
-
-

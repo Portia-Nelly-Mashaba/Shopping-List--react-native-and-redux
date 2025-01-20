@@ -1,58 +1,33 @@
+// ShoppingList.js
 import { View, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 import React from 'react';
-import Icon from 'react-native-vector-icons/MaterialIcons'; // import icons
+import { useSelector, useDispatch } from 'react-redux';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import { deleteItem } from '../redux/shoppingSlice';
 
 const ShoppingList = () => {
-  const data = [
-    {
-      id: 1,
-      name: 'Milk',
-      quantity: 2
-    },
-    {
-      id: 2,
-      name: 'Bread',
-      quantity: 1
-    },
-    {
-      id: 3,
-      name: 'Eggs',
-      quantity: 12
-    }
-  ];
+  const items = useSelector(state => state.shopping.items);
+  const dispatch = useDispatch();
 
-  const deleteItem = (id) => {
-    // Function to delete item
-    console.log("Deleted item with id:", id);
+  const handleDeleteItem = (id) => {
+    dispatch(deleteItem({ id }));
   };
 
-  const editItem = (id) => {
-    // Function to edit item
-    console.log("Edited item with id:", id);
-  };
-
-  const renderItem = ({ item }) => {
-    return (
-      <View style={styles.item}>
-        <Text style={styles.name}>{item.name}</Text>
-        <Text style={styles.quantity}>qty: {item.quantity}</Text>
-        <View style={styles.iconContainer}>
-          <TouchableOpacity onPress={() => editItem(item.id)}>
-            <Icon name="edit" size={24} color="blue" />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => deleteItem(item.id)}>
-            <Icon name="delete" size={24} color="red" />
-          </TouchableOpacity>
-        </View>
-      </View>
-    );
-  };
+  const renderItem = ({ item }) => (
+    <View style={styles.item}>
+      <Text style={styles.name}>{item.name}</Text>
+      <Text style={styles.quantity}>qty: {item.quantity}</Text>
+      <TouchableOpacity onPress={() => handleDeleteItem(item.id)}>
+        <Icon name="delete" size={24} color="red" />
+      </TouchableOpacity>
+    </View>
+  );
 
   return (
     <View>
       <Text style={styles.header}>Shopping List</Text>
       <FlatList
-        data={data}
+        data={items}
         renderItem={renderItem}
         keyExtractor={item => item.id.toString()}
       />
@@ -65,7 +40,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginVertical: 20
+    marginVertical: 20,
   },
   item: {
     backgroundColor: '#f9f9f9',
@@ -80,20 +55,16 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 3,
-    elevation: 3
+    elevation: 3,
   },
   name: {
     fontSize: 16,
-    color: '#333'
+    color: '#333',
   },
   quantity: {
     fontSize: 16,
-    color: '#666'
+    color: '#666',
   },
-  iconContainer: {
-    flexDirection: 'row',
-    alignItems: 'center'
-  }
 });
 
 export default ShoppingList;

@@ -1,9 +1,9 @@
-import {ConfigureStore} from './configureStore';
+import { configureStore } from '@reduxjs/toolkit';
 
 import shoppingReducer from './shoppingSlice';
 
 
-export const store = ConfigureStore({
+export const store = configureStore({
     reducer: {
         shopping: shoppingReducer
     }
