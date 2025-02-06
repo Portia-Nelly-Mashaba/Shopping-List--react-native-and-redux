@@ -65,8 +65,8 @@ To run this project locally, follow these steps:
 
 ## Screenshots
 
-![Shopping List View](assets/shopping-list-view.jpg)
-![Item Management](assets/item-management.jpg)
+![Shopping List View](assets/shopping-list-view.png)
+![Item Management](assets/item-management.png)
 
 
 
